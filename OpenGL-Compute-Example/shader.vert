@@ -1,4 +1,4 @@
-﻿#version 450
+#version 430
 
 uniform mat4 model;
 uniform mat4 projection;
