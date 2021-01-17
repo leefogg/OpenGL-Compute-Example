@@ -48,7 +48,7 @@ namespace OpenGL_Compute_Example
             var fragmentShaderSource = File.ReadAllText("shader.frag");
             var fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(fragmentShader, fragmentShaderSource);
-            CompileShader(vertexShader);
+            CompileShader(fragmentShader);
 
             renderProgram = GL.CreateProgram();
             GL.AttachShader(renderProgram, vertexShader);
