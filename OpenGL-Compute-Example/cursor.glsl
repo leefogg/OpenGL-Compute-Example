@@ -11,7 +11,7 @@ layout(std430, binding = 1) buffer vel
 };
 
 uniform vec2 cursor;
-uniform float dt = 0;
+uniform float deltaTime = 0;
 
 layout(local_size_x = 1000, local_size_y = 1, local_size_z = 1) in;
 
@@ -34,7 +34,7 @@ void main() {
   velocity.x += accel2D.x;
   velocity.y += accel2D.y;
 
-  position = position + velocity * dt;
+  position = position + velocity * deltaTime;
 
   //Save our position and velocities for displaying
   positions[gl_GlobalInvocationID.x] = position;

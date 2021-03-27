@@ -71,7 +71,7 @@ namespace OpenGL_Compute_Example
 
             GL.UseProgram(computeShader);
             cursorUniformLocation = GL.GetUniformLocation(computeProgram, "cursor");
-            deltaTimeUniformLocation = GL.GetUniformLocation(computeProgram, "dt");
+            deltaTimeUniformLocation = GL.GetUniformLocation(computeProgram, "deltaTime");
         }
 
         protected static void CompileShader(int shader)
