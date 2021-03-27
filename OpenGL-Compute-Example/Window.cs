@@ -30,8 +30,8 @@ namespace OpenGL_Compute_Example
             createComputeBuffers();
             createShaders();
 
-            GL.ClearColor(.05f, 0.05f, 0.05f, 1.0f);
-            GL.PointSize(2.0f);
+            GL.ClearColor(0, 0, 0, 1);
+            GL.PointSize(2);
 
             // Basic native additive blending
             GL.Enable(EnableCap.Blend);
