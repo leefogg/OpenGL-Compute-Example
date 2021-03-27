@@ -125,9 +125,9 @@ namespace OpenGL_Compute_Example
             var vel = buffers[1];
 
             GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, pos);
-            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(positions), positions, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(positions), positions, BufferUsageHint.DynamicDraw);
             GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 1, vel);
-            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(velocities), velocities, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(velocities), velocities, BufferUsageHint.DynamicDraw);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
