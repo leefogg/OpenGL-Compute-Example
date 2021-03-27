@@ -26,6 +26,7 @@ namespace OpenGL_Compute_Example
 
         protected override void OnLoad()
         {
+            createRenderBuffers();
             createComputeBuffers();
             createShaders();
 
@@ -107,27 +108,31 @@ namespace OpenGL_Compute_Example
             var positions = new Vector4[NumParticles];
             var velocities = new Vector4[NumParticles];
             var r = new Random();
-            for (var i=0; i<NumParticles; i++)
+            for (var i = 0; i < NumParticles; i++)
             {
                 // Random positions in range [-1, 1]
                 var posx = (float)r.NextDouble() * 2 - 1;
                 var posy = (float)r.NextDouble() * 2 - 1;
                 positions[i] = new Vector4(posx, posy, 0, 0);
-                velocities[i] = new Vector4(0,0,0,0);
+                velocities[i] = new Vector4(0, 0, 0, 0);
             }
-
-            var vao = GL.GenVertexArray();
-            GL.BindVertexArray(vao);
 
             var buffers = new int[2];
             GL.GenBuffers(buffers.Length, buffers);
-            var pos = buffers[0];
-            var vel = buffers[1];
+            var positionBuffer = buffers[0];
+            var velocityBuffer = buffers[1];
 
-            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, pos);
+            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, positionBuffer);
             GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(positions), positions, BufferUsageHint.DynamicDraw);
-            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 1, vel);
+            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 1, velocityBuffer);
             GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(velocities), velocities, BufferUsageHint.DynamicDraw);
+        }
+
+        private static void createRenderBuffers()
+        {
+            // Empty VAO, position of each vert is in positions buffer
+            var vao = GL.GenVertexArray();
+            GL.BindVertexArray(vao);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
