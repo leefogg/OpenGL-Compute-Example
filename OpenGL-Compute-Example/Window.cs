@@ -58,7 +58,7 @@ namespace OpenGL_Compute_Example
             GL.DeleteShader(fragmentShader);
 
             // Compute Program
-            var computeShaderSource = File.ReadAllText("cursor.glsl");
+            var computeShaderSource = File.ReadAllText("update.glsl");
 
             var computeShader = GL.CreateShader(ShaderType.ComputeShader);
             GL.ShaderSource(computeShader, computeShaderSource);
