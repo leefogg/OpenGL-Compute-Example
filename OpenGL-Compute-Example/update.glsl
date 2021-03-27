@@ -1,13 +1,8 @@
 #version 430
 
-layout(std430, binding = 0) buffer pos
+layout(std430, binding = 0) buffer particles
 {
-  vec4 positions[];
-};
-
-layout(std430, binding = 1) buffer vel
-{
-  vec4 velocities[];
+  vec4 Particles[];
 };
 
 uniform vec2 cursor;
@@ -20,24 +15,21 @@ const float G = 0.0001;
 void main() {
 	// Get easier references to positions/velocities
 	uint id = gl_GlobalInvocationID.x;
-	vec4 position = positions[id];
-	vec4 velocity = velocities[id];
+	vec4 particle = Particles[id];
+	vec2 position = particle.xy;
+	vec2 velocity = particle.zw;
 
 	//Build our 2D acceleration using universal gravitation
-	vec2 r;
-	r.x = cursor.x - position.x;
-	r.y = cursor.y - position.y;
+	vec2 r = cursor - position;
 	float magnitude = length(r);
 	r = normalize(r);
 	vec2 accel2D = r * (G) / (magnitude * magnitude);
 
 	//Update our velocity and position
-	velocity.x += accel2D.x;
-	velocity.y += accel2D.y;
+	velocity += accel2D;
 
-	position = position + velocity * deltaTime;
+	position += velocity * deltaTime;
 
 	//Save our position and velocities for displaying
-	positions[id] = position;
-	velocities[id] = velocity;
+	Particles[id] = vec4(position, velocity);
 }

@@ -105,27 +105,22 @@ namespace OpenGL_Compute_Example
 
         private void createComputeBuffers()
         {
-            var positions = new Vector4[NumParticles];
-            var velocities = new Vector4[NumParticles];
+            var particles = new Vector4[NumParticles];
             var r = new Random();
             for (var i = 0; i < NumParticles; i++)
             {
                 // Random positions in range [-1, 1]
                 var posx = (float)r.NextDouble() * 2 - 1;
                 var posy = (float)r.NextDouble() * 2 - 1;
-                positions[i] = new Vector4(posx, posy, 0, 0);
-                velocities[i] = new Vector4(0, 0, 0, 0);
+                particles[i] = new Vector4(posx, posy, 0, 0);
             }
 
-            var buffers = new int[2];
+            var buffers = new int[1];
             GL.GenBuffers(buffers.Length, buffers);
             var positionBuffer = buffers[0];
-            var velocityBuffer = buffers[1];
 
             GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, positionBuffer);
-            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(positions), positions, BufferUsageHint.DynamicDraw);
-            GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 1, velocityBuffer);
-            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(velocities), velocities, BufferUsageHint.DynamicDraw);
+            GL.BufferData(BufferTarget.ShaderStorageBuffer, SizeInBytes(particles), particles, BufferUsageHint.DynamicDraw);
         }
 
         private static void createRenderBuffers()
