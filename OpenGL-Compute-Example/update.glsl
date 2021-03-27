@@ -13,7 +13,7 @@ layout(std430, binding = 1) buffer vel
 uniform vec2 cursor;
 uniform float deltaTime = 0;
 
-layout(local_size_x = 1000, local_size_y = 1, local_size_z = 1) in;
+layout(local_size_x = 1024, local_size_y = 1, local_size_z = 1) in;
 
 const float G = 0.0001;
 

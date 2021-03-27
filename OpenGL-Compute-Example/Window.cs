@@ -12,7 +12,7 @@ namespace OpenGL_Compute_Example
 {
     public class Window : GameWindow
     {
-        private const int NumParticles = 7000000;
+        private const int NumParticles = 1024 * 1024 * 7;
         private DateTime lastFrameTime = DateTime.Now;
         private int renderProgram;
         private int computeProgram;
@@ -153,7 +153,7 @@ namespace OpenGL_Compute_Example
                 GL.Uniform2(cursorUniformLocation, cursor);
                 timeScaler *= 0.1f;
                 GL.Uniform1(deltaTimeUniformLocation, timeScaler);
-                GL.DispatchCompute(NumParticles / 1000, 1, 1);
+                GL.DispatchCompute(NumParticles / 1024, 1, 1);
             }
 
             GL.UseProgram(renderProgram);
