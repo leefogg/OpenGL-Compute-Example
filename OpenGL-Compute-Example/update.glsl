@@ -23,7 +23,7 @@ void main() {
 	vec2 r = cursor - position;
 	float magnitude = length(r);
 	r = normalize(r);
-	vec2 accel2D = r * (G) / (magnitude * magnitude);
+	vec2 accel2D = r * G / (magnitude * magnitude);
 
 	//Update our velocity and position
 	velocity += accel2D;
